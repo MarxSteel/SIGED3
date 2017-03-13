@@ -1,10 +1,10 @@
 <?php
 $server = 'http://interactbrasil.org/sistema';
 // constantes com as credenciais de acesso ao banco MySQL
-$host = "mysql.hostinger.com.br";
-$user = "u220304474_intra";
-$pass = "aA4WzQKePjMk";
-$banco = "u220304474_intra";
+$host = "localhost:8889";
+$user = "root";
+$pass = "root";
+$banco = "siged_novo";
 $titulo = "SIGED - Sistema Integrado de Gestão Distrital <<MDIO INTERACT BRASIL>>";
 $versao = "1.1.1";
 define('DB_HOST', $host);
@@ -25,8 +25,8 @@ $conn = mysqli_connect($host, $user, $pass, $banco) or die("Connection failed: "
 /* config.php */
 function dbcon()
 {
-    @mysql_connect("mysql.hostinger.com.br", "u220304474_intra", "aA4WzQKePjMk") or die(mysql_error());
-    @mysql_select_db("u220304474_intra") or die(mysql_error());
+    @mysql_connect("localhost:8889", "root", "root") or die(mysql_error());
+    @mysql_select_db("siged_novo") or die(mysql_error());
 }
 
 
