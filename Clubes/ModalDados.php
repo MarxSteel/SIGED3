@@ -42,7 +42,7 @@
              $D3 =  "<br />Usuário responsável pelo Cadastro: " . $CodigoAssociado . " - " . $uNome;
              $D4 = "<br /><strong>Data de Cadastro: </strong>" . $D3;
               $DetalheInserir = $D1 . $D2 . $D3 . $D4;
-            $InsereLog = $PDO->query("INSERT INTO log_dados (usuario, CodEvento, DescreveEvento, DetalhesEvento) VALUES ('$CodigoAssociado', '102', '$DescreveEvento', '$DetalheInserir')");
+            $InsereLog = $PDO->query("INSERT INTO log_dados (usuario, CodEvento, DescreveEvento, DetalhesEvento, TipoLog, CodValidador) VALUES ('$CodigoAssociado', '102', '$DescreveEvento', '$DetalheInserir', '1', '$codClube')");
              if ($InsereLog)
              {
               echo '<script type="text/JavaScript">alert("ATUALIZADO COM SUCESSO");
