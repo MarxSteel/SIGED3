@@ -413,8 +413,8 @@
         <div class="col-xs-4">Senha de Administrador
          <input name="passRDI" type="password"  class="form-control" />
         </div>
-        <div class="col-xs-4"><br />
-         <input name="NovoClub" type="submit" class="btn btn-primary block" value="CADASTRAR CLUBE"  />
+        <div class="col-xs-12"><br />
+         <input name="NovoClub" type="submit" class="btn btn-primary btn-block" value="CADASTRAR CLUBE"  />
         </div>
         <div class="modal-footer"><br /><br /><br />
         </div>
@@ -444,33 +444,54 @@
           $NovaData = $_POST['DataFund'];
 
           $Cadastra = $PDO->query("INSERT INTO icbr_clube (icbr_Clube, icbr_DataFundado, icbr_Distrito, icbr_RotaryPadrinho, icbr_CEnd, icbr_CNum, icbr_Bairro, icbr_Cidade, icbr_CEP, icbr_UF, icbr_Periodo, icbr_Semana, icbr_Horario, icbr_Complemento, icbr_Status, icbr_EndComplemento) VALUES ('$NomeClube', '$DataFundado', '$Distrito', '$NomeRotary', '$Rua', '$Num', '$Bairro', '$Cidade', '$CEP', '$UF', '$PeriodoReuniao', '$DiaReuniao', '$HoraReuniao', '$LocalReuniao', 'A', '$novoComp')");
-
            if($Cadastra)
            {
-            echo '<script type="text/JavaScript">alert("Clube Cadastrado com Sucesso");
+            $CodEvento = "101";
+            $DescreveEvento = "Cadastro de Novo Club: Interact Club de " . $NomeClube;
+             $v1 = date('d/m/Y - H:i:s');
+             $D1 = "<strong>Nome do Club:</strong> " . $NomeClube;
+             $D2 = "<strong>Rotary Clubs Patrocinadores:</strong> " . $NomeRotary;
+              $DetalheClube = $D1 . $D2;
+             $L1 = "<strong>Local de Reunião:</strong> " . $LocalReuniao;
+             $L2 = " <strong>Horário:</strong> " . $HoraReuniao;
+             $L3 = " <strong>Periodo:</strong> " . $PeriodoReuniao;
+             $L4 = " <strong>Dia da Semana:</strong> " . $DiaReuniao;
+              $DetalheLocal - $L1 . $L2 . $L3 . $L4;
+             $E1 = "<strong>Endereço: </strong>" . $Rua;
+             $E2 = ", <strong>Num.:</strong>" . $Num;
+             $E3 = "<br /><strong>Complemento: </strong>" . $novoComp;
+             $E4 = " <strong>Bairro: </strong>" . $Cidade . " <strong>Cidade: </strong>" . $Cidade;
+             $E5 = " <strong>CEP.: </strong>" . $CEP . " - " . $UF;
+              $DetalheEndereco = $E1 . $E2 . $E3 . $E4 . $E5;
+            $T1 = "<h3>Dados do Cadastro: </h3><br /> <i>Informações do Clube: </i><br />" . $DetalheClube;
+            $T2 = "<br /><i>Dados de Local de Reunião:<i> " . $DetalheLocal;
+            $T3 = "<br /><i>Endereço:<i> " . $DetalheEndereco;
+            $T4 = "Data de Cadastro: " . $V1 . "<br /> Usuário responsável pelo Cadastro: " . $CodigoAssociado . " - " . $uNome;
+             $Tudo = $T1 . $T2 . $T3 . $T4;
+            $InsereLog = $PDO->query("INSERT INTO log_dados (usuario, CodEvento, DescreveEvento, DetalhesEvento) VALUES ('$CodigoAssociado', '101', '$DescreveEvento', '$Tudo')");
+             if ($InsereLog)
+             {
+              echo '<script type="text/JavaScript">alert("Clube Cadastrado com Sucesso");
               location.href="dashboard.php"</script>';
+             }
+             else{
+              echo '<script type="text/javascript">alert("Erro! Não foi possível concluir. Erro: 0x01");</script>';
+              echo '<script type="text/javascript">window.close();</script>';
+             }
            }
            else
            {
-            echo '<script type="text/javascript">alert("NÃO FOI POSSÍVEL CADASTRAR, ENTRE EM CONTATO COM A INTERACT BRASIL");</script>';
+            echo '<script type="text/javascript">alert("Erro! Não foi possível concluir. Erro: 0x03");</script>';
             echo '<script type="text/javascript">window.close();</script>';
            }
-
-
-
          }
          else 
          {
-          echo '<script type="text/javascript">alert("SENHA INVÁLIDA");</script>';
+            echo '<script type="text/javascript">alert("Erro! SENHA INVÁLIDA. Erro: 0x00");</script>';
           echo '<script type="text/javascript">window.close();</script>';
          }
         }
        ?>    
-
-
-
-
-
    </div>
    <div class="modal-footer"></div>
   </div>
@@ -490,7 +511,6 @@
       </div>
       <div class="modal-body">
         <h3>E-Mail Atual: <strong><?php echo $clubeMail; ?></strong></h3>
-
        <form name="NovoEmail" id="name" method="post" action="" enctype="multipart/form-data">
         <div class="col-xs-8">Novo E-mail
          <input name="MailNovo" type="mail" required class="form-control" placeholder="email@mail.com" />
