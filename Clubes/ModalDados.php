@@ -11,7 +11,6 @@
       </div>
       <div class="modal-body">
         <h3>Rotary Club Patrocinador Atual: <strong><?php echo $clubeRotary; ?></strong></h3>
-
        <form name="ReativaClube" id="name" method="post" action="" enctype="multipart/form-data">
         <div class="col-xs-8">Rotary Club Padrinho
          <input name="RCPadrinho" type="text" required class="form-control" placeholder="Nome Completo do Rotary Club Padrinho" />
@@ -35,18 +34,34 @@
            $executa = $PDO->query("UPDATE icbr_clube SET icbr_RotaryPadrinho='$RotaryPadrinho' WHERE icbr_id='$codClube' ");
            if($executa)
            {
-            echo '<script type="text/JavaScript">alert("ATUALIZADO COM SUCESSO");
+            $CodEvento = "102";
+            $DescreveEvento = "Troca de Rotary Club Patrocinador ";
+             $D1 = "<strong>Rotary Club Anterior: </strong>" . $clubeRotary;
+             $D2 = "<br /><strong>Novo Rotary Club: </strong> " . $RotaryPadrinho;
+             $D = date('d/m/Y - H:i:s');             
+             $D3 =  "<br />Usuário responsável pelo Cadastro: " . $CodigoAssociado . " - " . $uNome;
+             $D4 = "<br /><strong>Data de Cadastro: </strong>" . $D3;
+              $DetalheInserir = $D1 . $D2 . $D3 . $D4;
+            $InsereLog = $PDO->query("INSERT INTO log_dados (usuario, CodEvento, DescreveEvento, DetalhesEvento) VALUES ('$CodigoAssociado', '102', '$DescreveEvento', '$DetalheInserir')");
+             if ($InsereLog)
+             {
+              echo '<script type="text/JavaScript">alert("ATUALIZADO COM SUCESSO");
               location.href="vClube.php?ID=' . $codClube . '"</script>';
+             }
+             else{
+              echo '<script type="text/javascript">alert("Erro! Não foi possível concluir. Erro: 0x03");</script>';
+              echo '<script type="text/javascript">window.close();</script>';
+             }
            }
            else
            {
-            echo '<script type="text/javascript">alert("NÃO FOI POSSÍVEL ATUALIZAR CADASTRO, ENTRE EM CONTATO COM A INTERACT BRASIL");</script>';
-            echo '<script type="text/javascript">window.close();</script>';
+              echo '<script type="text/javascript">alert("Erro! Não foi possível concluir. Erro: 0x04");</script>';
+              echo '<script type="text/javascript">window.close();</script>';
            }
          }
          else 
          {
-          echo '<script type="text/javascript">alert("SENHA INVÁLIDA");</script>';
+          echo '<script type="text/javascript">alert("Erro! SENHA INVÁLIDA. Erro: 0x00");</script>';
          }
         }
        ?>
@@ -487,7 +502,7 @@
          }
          else 
          {
-            echo '<script type="text/javascript">alert("Erro! SENHA INVÁLIDA. Erro: 0x00");</script>';
+          echo '<script type="text/javascript">alert("Erro! SENHA INVÁLIDA. Erro: 0x00");</script>';
           echo '<script type="text/javascript">window.close();</script>';
          }
         }
