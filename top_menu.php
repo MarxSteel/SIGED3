@@ -34,7 +34,7 @@
          </div>
          <div class="col-xs-6 text-center">
           <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#TermosUso">Termo de Uso</button>
-         </div>
+         </div>         
         </div>
        </li>
        <!-- RODAPÉ DO MENU -->
