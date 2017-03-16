@@ -50,145 +50,124 @@ $teste = "teste";
   <div class="content-wrapper">
    <div class="container">
     <section class="content">
-     <div class="box box-default">
-      <div class="box-header with-border">
-       <h2 class="box-title"><strong>ID #<?php echo $codProjeto; ?></strong> - <?php echo $NomeProjeto; ?></h2>
-      </div>
-      <div class="box-body">
-       <div class="col-xs-8">
-        <li class="list-group-item">
-         <b>Clube:</b> 
-         <a class="pull-right">Interact Club de <?php echo $ClubeProjeto . '<strong> (D. ' . $DistritoProjeto . ')</strong>'; ?></a>
-        </li>
-        <li class="list-group-item">
-         <b>Data de Cadastro:</b> 
-         <a class="pull-right"><?php echo $DataCadastro; ?></strong></i></a>
-        </li>
-        <li class="list-group-item">
-         <b>E-Mail responsavel por projetos:</b> 
-         <a class="pull-right"><?php echo $EmailClube; ?></strong></i></a>
-        </li>
-       </div>
-       <div class="col-xs-4">
-        <li class="list-group-item"><h4>CHAVE DE ACESSO:</h4><br />
-         <h2><strong><code><?php echo $ChaveCry; ?></code></strong></h2>
-        </li>
-       </div>
-       <div class="col-xs-3">
-        <li class="list-group-item">
-         <?php
-          if ($StatusProjeto === '1') {
-           echo '<div class="bg-green-active color-palette" align="middle"><span>REVISADO</span></div>';
-          }
-          elseif ($StatusProjeto === "2") {
-           echo '<div class="bg-purple-active color-palette" align="middle"><span>AGUARDANDO REVIS&Atilde;O</span></div>';
-          }
-          elseif ($StatusProjeto === "3") {
-           echo '<div class="bg-orange-active color-palette" align="middle"><span>PENDENTE</span></div>';
-          }
-          elseif ($StatusProjeto === "4") {
-           echo '<div class="bg-navy-active color-palette" align="middle"><span>N&Atilde;O PREENCHIDO</span></div>';
-          }
-          else{
-          }
-         ?>        
-         </li>
-       </div>
-       <div class="col-xs-3">
-        <li class="list-group-item">
-         <?php
-          if ($AndamentoProjeto === '1') {
-           echo '<div class="bg-olive-active color-palette" align="middle"><span>PLANEJAMENTO</span></div>';
-          }
-          elseif ($AndamentoProjeto === "2") {
-           echo '<div class="bg-maroon-active color-palette" align="middle"><span>EM EXECU&Ccedil;&Atilde;O</span></div>';
-          }
-          elseif ($AndamentoProjeto === "3") {
-           echo '<div class="bg-green-active color-palette" align="middle"><span>FINALIZADO</span></div>';
-          }
-          else{
-          }
-         ?>        
-         </li>
-       </div>
-       <div class="col-xs-3">
-        <li class="list-group-item">
-         <div class="bg-black-active color-palette" align="middle"><span><?php echo $AvenidaProjeto; ?></span></div>
-        </li>
-       </div> 
-       <div class="col-xs-3">
-        <li class="list-group-item">
-         <?php
-         if ($AbrangenciaProjeto === "1") {
-          echo '<div class="bg-navy-active color-palette" align="middle">
-                 <span>PROJETO DO CLUBE</span>
-                </div>';
-         }
-         elseif ($AbrangenciaProjeto === "2") {
-           echo '<div class="bg-orange-active color-palette" align="middle">
-                 <span>PROJETO MULTI-CLUBE</span>
-                </div>';
-         }
-         elseif ($AbrangenciaProjeto === "3") {
-           echo '<div class="bg-red-active color-palette" align="middle">
-                 <span>PROJETO DISTRITAL</span>
-                </div>';
-         }
-         elseif ($AbrangenciaProjeto === "4") {
-           echo '<div class="bg-blue-active color-palette" align="middle">
-                 <span>PROJETO MULTI-DISTRITAL</span>
-                </div>';
-         }
-         ?>
-        </li>
-       </div> 
-       <div class='col-xs-12'>HISTÓRICO DE ALTERA&Ccedil;&Otilde;ES</div> 
-       <div class="col-xs-12 list-group-item">
-      <table id="ListaLog" class="table table-bordered table-striped">
-       <thead>
-        <tr>
-         <td width="10%"><strong>Cod.</strong></td>
-          <td width="15%"><strong>Data</strong></td>
-          <td width="20%"><strong>Usu&aacute;rio</strong></td>
-          <td width="45%"><strong>Detalhe</strong></td>
-          <td width="10%"></td>
-        </tr>
-       </thead>
-       <tbody>
-        <?php
-         $ClubeAtivo = "SELECT * FROM log_projeto WHERE CodProjeto='$codProjeto'";
-          $ChamaAtivo = $PDO->prepare($ClubeAtivo);
-          $ChamaAtivo->execute();
-          while ($at = $ChamaAtivo->fetch(PDO::FETCH_ASSOC)): 
-          echo '<tr>';
-           echo '<td>' . $at["id"] . '</td>';
-           echo '<td>' . $at["DataCadastro"] . '</td>';
-           echo '<td>' . $at["UserCadastro"] . '</td>';
-           echo '<td>' . $at["NomeCodigo"] . '</td>';
-           echo '<td>';
-            echo '<a class="btn btn-default btn-xs btn-block" href="javascript:abrir(';
-            echo "'vDetalhe.php?ID=" . $at['id'] . "');";
-            echo '"><i class="fa fa-search"></i> Visualizar detalhe</a>&nbsp;';
-          echo '</td>';
-          echo '</tr>';
-          endwhile;
-        ?>
-       </tbody>
-       <tfoot>
-        <tr>
-         <td><strong>Cod</strong></td>
-         <td><strong>Data</strong></td>
-         <td><strong>Usu&aacute;rio</strong></td>
-         <td><strong>Detalhe</strong></td>
-         <td></td>
-        </tr>
-       </tfoot>
-      </table>
-       </div>
-      </li>
-      </div>
-      </div>
+    <div class="box box-primary">
+     <div class="box-header with-border">
+      <h2 class="box-title"><strong>ID #<?php echo $IDProjeto; ?></strong> - <?php echo $NomeProjeto; ?></h2>
      </div>
+     <div class="box-body">
+      <div class="col-xs-6">
+       <li class="list-group-item">
+        <b>Clube:</b> 
+        <a class="pull-right">Interact Club de <?php echo $ClubeProjeto . '<strong> (D. ' . $DistritoProjeto . ')</strong>'; ?></a>
+       </li>
+       <li class="list-group-item">
+        <b>Data de Cadastro:</b> 
+        <a class="pull-right"><?php echo $DataCadastro; ?></strong></i></a>
+       </li>
+       <li class="list-group-item">
+        <b>E-Mail:</b> 
+        <a class="pull-right"><?php echo $EmailClube; ?></strong></i></a>
+       </li>
+      </div>
+      <div class="col-xs-4">
+       <li class="list-group-item">
+        <h4><?php echo $AvenidaProjeto; ?></h4>
+       </li>
+       <li class="list-group-item">
+       <?php 
+       if ($StatusProjeto === "1") 
+       {
+         echo '<button class="btn btn-warning btn-block disabled">AGUARDANDO REVISÃO</button>';
+       }
+       elseif ($StatusProjeto === "2") {
+         echo '<button class="btn btn-danger btn-block disabled">REPROVADO</button>';
+       }
+       elseif ($StatusProjeto === "3") {
+         echo '<button class="btn btn-success btn-block disabled">APROVADO</button>';
+       }
+      ?>
+       </li>
+      </div>
+      <div class="col-xs-2">
+       <li class="list-group-item">
+        <a href="uploads/<?php echo $Baixar; ?>"><img src="../dist/img/pdf.jpg" alt="Baixar Imagem" width="80" /></a>
+       </li>
+      </div>
+
+
+     </div>
+    </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#fa-icons" data-toggle="tab">Linha do Tempo do Projeto</a></li>
+              <li><a href="#glyphicons" data-toggle="tab">Pendências</a></li>
+            </ul>
+            <div class="tab-content">
+             <div class="tab-pane active" id="fa-icons">
+              <ul class="timeline">
+              <?php
+               $Equipe = "SELECT * FROM log_projeto WHERE CodProjeto='$codProjeto' ORDER BY id DESC";
+                $qryEquipe = $PDO->prepare($Equipe);
+                $qryEquipe->execute();
+              while ($equipe = $qryEquipe->fetch(PDO::FETCH_ASSOC)): 
+                $CategoriaEvento = $equipe['Codigo'];
+                if ($CategoriaEvento === "12") { ?>
+                 <li class="time-label"><span class="bg-red"><?php echo $equipe['DataCadastro']; ?></span></li>
+                 <li>
+                  <i class="fa fa-remove bg-red"></i>
+                  <div class="timeline-item">
+                   <h3 class="timeline-header"><a href="#"><?php echo $equipe['UserCadastro']; ?></a> Reprovou o Projeto</h3>
+                   <div class="timeline-body"><?php echo $equipe['DetalheCodigo']; ?></div>
+                  </div>
+                 </li>
+                <?php } elseif ($CategoriaEvento === "13") { ?>
+               <li class="time-label"><span class="bg-yellow"><?php echo $equipe['DataCadastro']; ?></span></li>
+               <li>
+                <i class="fa fa-refresh bg-yellow"></i>
+                <div class="timeline-item">
+                 <h3 class="timeline-header"><a href="#"><?php echo $equipe['UserCadastro']; ?></a> DEVOLVIDO PARA A INTERACT BRASIL</h3>
+                 <div class="timeline-body"><?php echo $equipe['DetalheCodigo']; ?></div>
+                </div>
+               </li>
+               <?php } elseif ($CategoriaEvento === "14") { ?>
+              <li class="time-label"><span class="bg-green"><?php echo $equipe['DataCadastro']; ?></span></li>
+              <li>
+               <i class="fa fa-check bg-green"></i>
+                <div class="timeline-item">
+                 <h3 class="timeline-header"><a href="#"><?php echo $equipe['UserCadastro']; ?></a> APROVOU O PROJETO PARA O ANP</h3>
+                 <div class="timeline-body"><?php echo $equipe['DetalheCodigo']; ?></div>
+                </div>
+               </li>
+               <?php } elseif ($CategoriaEvento === "11") { ?>
+              <li class="time-label"><span class="bg-blue"><?php echo $equipe['DataCadastro']; ?></span></li>
+              <li>
+               <i class="fa fa-plus bg-blue"></i>
+                <div class="timeline-item">
+                 <h3 class="timeline-header"><a href="#"><?php echo $equipe['UserCadastro']; ?></a> CADASTROU O PROJETO</h3>
+                 <div class="timeline-body"><?php echo $equipe['DetalheCodigo']; ?></div>
+                </div>
+               </li>
+              <?php } else { }  endwhile; ?>
+          </ul>
+
+
+
+
+
+
+
+
+             </div>
+             <div class="tab-pane" id="glyphicons">
+teste2
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
  </div><?php include_once '../footer.php'; ?></div>

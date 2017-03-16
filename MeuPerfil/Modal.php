@@ -278,3 +278,23 @@
  </div>
 </div>
 <!-- MODAL PARA TROCA DE COR -->
+
+<!-- MODAL PARA TROCA DE SENHA -->
+<div id="FotoPerfil" class="modal fade" role="dialog">
+ <div class="modal-dialog modal-lg">
+  <div class="modal-content">
+   <div class="modal-header bg-green">
+    <button type="button" class="close" data-dismiss="modal">X</button>
+     <h4 class="modal-title">Atualizar Foto</h4>
+   </div>
+   <div class="modal-body">
+
+
+
+   </div>
+   <div class="modal-footer"></div>
+  </div>
+ </div>
+</div>
+<!-- MODAL PARA TROCA DE SENHA -->
+

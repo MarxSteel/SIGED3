@@ -213,8 +213,8 @@
        <div class="col-xs-2">N&uacute;mero
         <input type="text" name="num" required class="form-control"/>
        </div>
-       <div class="col-xs-4">CEP (COM PONTUAÇÃO)
-        <input type="text" name="CEP" required class="form-control" minlength="10" maxlength="10" placeholder="12.345-678" />
+       <div class="col-xs-4">Complemento
+        <input name="complementoEndereco" type="text" required class="form-control" />
        </div>
        <div class="col-xs-4">Bairro
         <input type="text" name="bairro" required class="form-control" placeholder="BAIRRO" />
@@ -252,10 +252,13 @@
          <option value="SE"> Sergipe</option>
         </select>
        </div>
+       <div class="col-xs-4">CEP (COM PONTUAÇÃO)
+        <input type="text" name="CEPEndereco" required class="form-control" minlength="10" maxlength="10" placeholder="12.345-678" />
+       </div>
        <div class="col-xs-4">Senha de Administrador
         <input name="passRDI" type="password" required class="form-control" />
        </div>
-       <div class="col-xs-4"><br />
+       <div class="col-xs-12"><br />
         <input name="AlteraEndereco" type="submit" class="btn btn-warning btn-block" value="ATUALIZAR ENDEREÇO"  />
        </div>
        <div class="modal-footer"><br /><br /><br />
@@ -270,11 +273,12 @@
          {
           $Rua = $_POST['rua'];
           $Num = $_POST['num'];
-          $CEP = $_POST['cep'];
+          $CEPEndereco = $_POST['CEPEndereco'];
+          $CompEndereco = $_POST['complementoEndereco'];
           $Bairro = $_POST['bairro'];
           $Cidade = $_POST['cidade'];
           $UF = $_POST['UF'];
-           $executa = $PDO->query("UPDATE icbr_clube SET icbr_CEnd='$Rua', icbr_CNum='$Num', icbr_Bairro='$Bairro', icbr_Cidade='$Cidade', icbr_UF='$UF' WHERE icbr_id='$codClube' ");
+           $executa = $PDO->query("UPDATE icbr_clube SET icbr_CEnd='$Rua', icbr_CNum='$Num', icbr_Bairro='$Bairro', icbr_Cidade='$Cidade', icbr_UF='$UF', icbr_CEP='$CEPEndereco', icbr_EndComplemento='$CompEndereco' WHERE icbr_id='$codClube' ");
            if($executa)
            {
             echo '<script type="text/JavaScript">alert("ATUALIZADO COM SUCESSO");
@@ -364,11 +368,11 @@
        <div class="col-xs-2">N&uacute;mero
         <input type="text" name="num"  class="form-control"/>
        </div>
-       <div class="col-xs-4">CEP (COM PONTUAÇÃO)
-        <input type="text" name="CEP"  class="form-control" minlength="10" maxlength="10" placeholder="12.345-678" />
-       </div>
        <div class="col-xs-4">Bairro
         <input type="text" name="bairro"  class="form-control" placeholder="BAIRRO" />
+       </div>
+       <div class="col-xs-4">CEP (COM PONTUAÇÃO)
+        <input type="text" name="CEP"  class="form-control" minlength="10" maxlength="10" placeholder="12.345-678" />
        </div>
        <div class="col-xs-4">Cidade
         <input type="text" name="cidade"  class="form-control" placeholder="CIDADE" />

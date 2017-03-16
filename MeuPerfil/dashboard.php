@@ -199,7 +199,9 @@ $AssI->execute();
        </div>
        <div class="col-xs-4">
        <p>
-<br /><br />
+        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#FotoPerfil">
+         <i class="fa fa-refresh"></i> Trocar Foto de Perfil
+        </button>
        </p>
        <p>
         <button type="button" class="btn btn-warning btn-block" data-toggle="modal" data-target="#TNome">
@@ -509,6 +511,72 @@ $AssI->execute();
  </div>
 </div>
 <!-- MODAL PARA TROCA DE COR -->
+<div id="FotoPerfil" class="modal fade" role="dialog">
+ <div class="modal-dialog modal-lg">
+  <div class="modal-content">
+   <div class="modal-header bg-blue">
+    <button type="button" class="close" data-dismiss="modal">X</button>
+     <h4 class="modal-title">Atualizar Foto</h4>
+   </div>
+   <div class="modal-body">
+   <form name="trocarFoto" id="name" method="post" action="" enctype="multipart/form-data">
+    Selecione uma imagem: <input name="arquivo" type="file" />
+    <br />
+    <input type="submit" class="btn btn-primary" value="Salvar" />
+   </form>
+<?php
+// verifica se foi enviado um arquivo 
+if(isset($_FILES['arquivo']['name']) && $_FILES["arquivo"]["error"] == 0)
+{
+  $arquivo_tmp = $_FILES['arquivo']['tmp_name'];
+  $nome = $_FILES['arquivo']['name'];
+  // Pega a extensao
+  $extensao = strrchr($nome, '.');
+  // Converte a extensao para mimusculo
+  $extensao = strtolower($extensao);
+  // Somente imagens, .jpg;.jpeg;.gif;.png
+  // Aqui eu enfilero as extesões permitidas e separo por ';'
+  // Isso server apenas para eu poder pesquisar dentro desta String
+  if(strstr('.jpg;.jpeg;.gif;.png', $extensao))
+  {
+    // Cria um nome único para esta imagem
+    // Evita que duplique as imagens no servidor.
+    $novoNome = md5(microtime()) . $extensao;
+    
+    // Concatena a pasta com o nome
+    $destino = '../dist/img/perfil/' . $novoNome; 
+    
+    // tenta mover o arquivo para o destino
+    if( @move_uploaded_file( $arquivo_tmp, $destino  ))
+    {
+      $InsereFoto = $PDO->query("UPDATE icbr_associado SET icbr_AssFoto='$novoNome' WHERE icbr_uid='$CodigoAssociado'");
+       if ($InsereFoto) 
+       {
+        echo '
+          <script type="text/JavaScript">alert("FOTO DE PERFIL SALVA COM SUCESSO!");
+          location.href="dashboard.php"</script>';
+       }
+       else{
+        echo '<script type="text/javascript">alert("NÃO FOI POSSÍVEL SALVAR FOTO DE PERFIL!");</script>';
+        echo '<script type="text/javascript">window.close();</script>';
+       }
+    }
+    else
+        echo '<script type="text/javascript">alert("Erro ao salvar o arquivo. Aparentemente você não tem permissão de escrita! ENTRE EM CONTATO COM A INTERACT BRASIL");</script>';
+        echo '<script type="text/javascript">window.close();</script>';
+  }
+  else
+   echo '<script type="text/javascript">alert("ocê poderá enviar apenas arquivos \"*.jpg;*.jpeg;*.gif;*.png\"");</script>';
+   echo '<script type="text/javascript">window.close();</script>';     
+}
+?>
+
+
+   </div>
+   <div class="modal-footer"></div>
+  </div>
+ </div>
+</div>
 <?php 
 include_once '../footer.php';
 ?>

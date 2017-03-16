@@ -107,7 +107,10 @@ $teste = "teste";
         INFORMAÇÕES DE ENDERECO 
        </h5>
        <li class="list-group-item">
-        <strong>ENDEREÇO: </strong> <?php echo $EndClube; ?> <strong>, NUM.: </strong> <?php echo $EndNClube; ?><br />
+        <strong>ENDEREÇO: </strong> 
+         <?php echo $EndClube; ?> 
+        <strong>, NUM.: </strong> <?php echo $EndNClube; ?><br />
+        <strong>COMPLEMENTO: </strong> <?php echo $EndComplemento; ?><br />
         <strong>BAIRRO/SETOR: </strong> <?php echo $BairroClube; ?><strong>, CEP: </strong><?php echo $CEPClube; ?><br />
         <strong>CIDADE: </strong> <?php echo $CidadeClube; ?><strong>, UF: </strong><?php echo $UFClube; ?>
        </li>

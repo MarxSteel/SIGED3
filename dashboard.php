@@ -33,6 +33,14 @@ require_once 'QueryUser.php';
  </section>
  <section class="content">
   <div class="row">
+   <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="info-box">
+     <a href="Distrito/dashboard.php" >
+      <span class="info-box-icon bg-navy"><i class="fa fa-building"></i></span>
+     </a>
+     <div class="info-box-content"><h4>Distrito <?php echo $Distrito; ?></h4>Dados do meu Distrito</div>
+    </div>
+   </div>
   <?php if ($PrivClubes === "1") { ?>
    <div class="col-md-4 col-sm-6 col-xs-12">
     <div class="info-box">

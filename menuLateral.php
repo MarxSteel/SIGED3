@@ -23,6 +23,12 @@
      </span>
    </a>
    <ul class="treeview-menu">
+    <li class="<?php echo $cDistrito; ?>">
+     <a href="<?php echo $server; ?>/Distrito/dashboard.php">
+      <i class="fa fa-building"></i>
+      Meu Distrito
+     </a>
+    </li>
    <?php if ($PrivClubes === "1") { ?>
     <li class="<?php echo $cClubes; ?>">
      <a href="<?php echo $server; ?>/Clubes/dashboard.php">
@@ -56,6 +62,7 @@
     </li>-->
     <?php } else { } ?>
  </li>
+
   <li class="<?php echo $cPerfil; ?>">
    <a href="<?php echo $server; ?>/MeuPerfil/dashboard.php">
     <i class="fa fa-users"></i> <span>Meu Perfil</span>
