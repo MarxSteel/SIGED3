@@ -326,7 +326,7 @@
      </div><br />
      <div class="input-group">
       <div class="input-group-addon">
-       <i class="fa fa-calendar"></i>[
+       <i class="fa fa-calendar"></i>
       </div>
        <input type="text" name="DataFundado" class="form-control" minlength="10" maxlength="10" OnKeyPress="formatar('##/##/####', this)"  placeholder="Data de Funda&ccedil;&atilde;o">
       </div>
@@ -368,11 +368,11 @@
        <div class="col-xs-2">N&uacute;mero
         <input type="text" name="num"  class="form-control"/>
        </div>
+       <div class="col-xs-4">Complemento
+        <input type="text" name="novoComp"  class="form-control" placeholder="Ex.: Ao lado da Loja de Ferragens" />
+       </div>
        <div class="col-xs-4">Bairro
         <input type="text" name="bairro"  class="form-control" placeholder="BAIRRO" />
-       </div>
-       <div class="col-xs-4">CEP (COM PONTUAÇÃO)
-        <input type="text" name="CEP"  class="form-control" minlength="10" maxlength="10" placeholder="12.345-678" />
        </div>
        <div class="col-xs-4">Cidade
         <input type="text" name="cidade"  class="form-control" placeholder="CIDADE" />
@@ -407,6 +407,9 @@
          <option value="SE"> Sergipe</option>
         </select>
        </div>
+       <div class="col-xs-4">CEP (COM PONTUAÇÃO)
+        <input type="text" name="CEP"  class="form-control" minlength="10" maxlength="10" placeholder="12.345-678" />
+       </div>       
         <div class="col-xs-4">Senha de Administrador
          <input name="passRDI" type="password"  class="form-control" />
         </div>
@@ -429,9 +432,10 @@
           $DataFundado = $_POST['DataFundado'];
           $Rua = $_POST['rua'];
           $Num = $_POST['num'];
-          $CEP = $_POST['cep'];
+          $CEP = $_POST['CEP'];
           $Bairro = $_POST['bairro'];
           $Cidade = $_POST['cidade'];
+          $novoComp = $_POST['novoComp'];
           $UF = $_POST['UF'];
           $LocalReuniao = $_POST['LocalReuniao'];
           $HoraReuniao = $_POST['HoraReuniao'];
@@ -439,7 +443,7 @@
           $DiaReuniao = $_POST['diaSemana'];
           $NovaData = $_POST['DataFund'];
 
-          $Cadastra = $PDO->query("INSERT INTO icbr_clube (icbr_Clube, icbr_DataFundado, icbr_Distrito, icbr_RotaryPadrinho, icbr_CEnd, icbr_CNum, icbr_Bairro, icbr_Cidade, icbr_CEP, icbr_UF, icbr_Periodo, icbr_Semana, icbr_Horario, icbr_Complemento, icbr_Status) VALUES ('$NomeClube', '$DataFundado', '$Distrito', '$NomeRotary', '$Rua', '$Num', '$Bairro', '$Cidade', '$CEP', '$UF', '$PeriodoReuniao', '$DiaReuniao', '$HoraReuniao', '$LocalReuniao', 'A')");
+          $Cadastra = $PDO->query("INSERT INTO icbr_clube (icbr_Clube, icbr_DataFundado, icbr_Distrito, icbr_RotaryPadrinho, icbr_CEnd, icbr_CNum, icbr_Bairro, icbr_Cidade, icbr_CEP, icbr_UF, icbr_Periodo, icbr_Semana, icbr_Horario, icbr_Complemento, icbr_Status, icbr_EndComplemento) VALUES ('$NomeClube', '$DataFundado', '$Distrito', '$NomeRotary', '$Rua', '$Num', '$Bairro', '$Cidade', '$CEP', '$UF', '$PeriodoReuniao', '$DiaReuniao', '$HoraReuniao', '$LocalReuniao', 'A', '$novoComp')");
 
            if($Cadastra)
            {
