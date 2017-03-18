@@ -19,8 +19,7 @@
          <input name="passRDI" type="password" required class="form-control" />
         </div>
         <div class="modal-footer"><br /><br /><br />
-         <input name="ReativaClube" type="submit" class="btn btn-primary" value="Atualizar Cadastro"  />
-         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+         <input name="ReativaClube" type="submit" class="btn btn-primary btn-lg btn-block" value="Atualizar Cadastro"  />
         </div>
        </form>
        <?php 
@@ -70,11 +69,11 @@
   </div>
 </div>
 <!-- FIM DO MODAL DE TROCA DE RC PATROCINADOR -->
-<!-- MODAL DE TROCA DE ROTARY CLUB PATROCINADOR -->
+<!-- MODAL DE TROCA DATA DE FUNDACAO DO CLUB -->
 <div class="modal fade" id="DataFundacao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header bg-red">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -83,16 +82,17 @@
       <div class="modal-body">
         <h3>Data de Fundação/Reativação Atual: <strong><?php echo $clubeDataFundado; ?></strong></h3>
        <form name="TrocaDataFundado" id="name" method="post" action="" enctype="multipart/form-data">
-        <div class="input-group">
-         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-          <input type="text" name="DataFund" class="form-control" minlength="10" maxlength="10" OnKeyPress="formatar('##/##/####', this)" required="required" placeholder="Data">
+        <div class="col-xs-4">Data de Funda&ccedil;&atilde;o
+         <div class="input-group">
+          <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+           <input type="text" name="DataFund" class="form-control" minlength="10" maxlength="10" OnKeyPress="formatar('##/##/####', this)" required="required" placeholder="Data">
          </div>
+        </div>
         <div class="col-xs-4">Senha de Administrador
          <input name="passRDI" type="password" required class="form-control" />
         </div>
         <div class="col-xs-4"><br />
-         <input name="TrocaDataFundado" type="submit" class="btn btn-primary" value="Atualizar Cadastro"  />
-         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+         <input name="TrocaDataFundado" type="submit" class="btn btn-danger btn-lg btn-block" value="Atualizar Cadastro"  />
         </div>
         <div class="modal-footer"><br /><br /><br />
         </div>
@@ -108,18 +108,34 @@
            $executa = $PDO->query("UPDATE icbr_clube SET icbr_DataFundado='$NovaData' WHERE icbr_id='$codClube' ");
            if($executa)
            {
-            echo '<script type="text/JavaScript">alert("ATUALIZADO COM SUCESSO");
+            $CodEvento = "103";
+            $DescreveEvento = "Troca de Data de Fundação ";
+             $D1 = "<strong>Data anterior: </strong>" . $clubeDataFundado;
+             $D2 = "<br /><strong>Nova data: </strong> " . $NovaData;
+             $D = date('d/m/Y - H:i:s');             
+             $D3 =  "<br />Usuário responsável pelo Cadastro: " . $CodigoAssociado . " - " . $uNome;
+             $D4 = "<br /><strong>Data de Cadastro: </strong>" . $D3;
+              $DetalheInserir = $D1 . $D2 . $D3 . $D4;
+            $InsereLog = $PDO->query("INSERT INTO log_dados (usuario, CodEvento, DescreveEvento, DetalhesEvento, TipoLog, CodValidador) VALUES ('$CodigoAssociado', '103', '$DescreveEvento', '$DetalheInserir', '1', '$codClube')");
+             if ($InsereLog)
+             {
+              echo '<script type="text/JavaScript">alert("ATUALIZADO COM SUCESSO");
               location.href="vClube.php?ID=' . $codClube . '"</script>';
+             }
+             else{
+              echo '<script type="text/javascript">alert("Erro! Não foi possível concluir. Erro: 0x05");</script>';
+              echo '<script type="text/javascript">window.close();</script>';
+             }
            }
            else
            {
-            echo '<script type="text/javascript">alert("NÃO FOI POSSÍVEL ATUALIZAR CADASTRO, ENTRE EM CONTATO COM A INTERACT BRASIL");</script>';
+            echo '<script type="text/javascript">alert("Erro! Não foi possível concluir. Erro: 0x06");</script>';
             echo '<script type="text/javascript">window.close();</script>';
            }
          }
          else 
          {
-          echo '<script type="text/javascript">alert("SENHA INVÁLIDA");</script>';
+          echo '<script type="text/javascript">alert("Erro! SENHA INVÁLIDA. Erro: 0x00");</script>';
           echo '<script type="text/javascript">window.close();</script>';
          }
         }
@@ -191,18 +207,32 @@
            $executa = $PDO->query("UPDATE icbr_clube SET icbr_Periodo='$PeriodoReuniao' , icbr_Semana='$DiaReuniao', icbr_Horario='$HoraReuniao', icbr_Complemento='$LocalReuniao'  WHERE icbr_id='$codClube' ");
            if($executa)
            {
-            echo '<script type="text/JavaScript">alert("ATUALIZADO COM SUCESSO");
+            $CodEvento = "104";
+            $DescreveEvento = "Troca de Dados de Reunião ";
+             $D = date('d/m/Y - H:i:s');             
+             $D3 =  "<br />Usuário responsável pelo Cadastro: " . $CodigoAssociado . " - " . $uNome;
+             $D4 = "<br /><strong>Data de Cadastro: </strong>" . $D3;
+              $DetalheInserir = $D3 . $D4;
+            $InsereLog = $PDO->query("INSERT INTO log_dados (usuario, CodEvento, DescreveEvento, DetalhesEvento, TipoLog, CodValidador) VALUES ('$CodigoAssociado', '104', '$DescreveEvento', '$DetalheInserir', '1', '$codClube')");
+             if ($InsereLog)
+             {
+              echo '<script type="text/JavaScript">alert("ATUALIZADO COM SUCESSO");
               location.href="vClube.php?ID=' . $codClube . '"</script>';
+             }
+             else{
+              echo '<script type="text/javascript">alert("Erro! Não foi possível concluir. Erro: 0x07");</script>';
+              echo '<script type="text/javascript">window.close();</script>';
+             }
            }
            else
            {
-            echo '<script type="text/javascript">alert("NÃO FOI POSSÍVEL ATUALIZAR CADASTRO, ENTRE EM CONTATO COM A INTERACT BRASIL");</script>';
+            echo '<script type="text/javascript">alert("Erro! Não foi possível concluir. Erro: 0x08");</script>';
             echo '<script type="text/javascript">window.close();</script>';
            }
          }
          else 
          {
-          echo '<script type="text/javascript">alert("SENHA INVÁLIDA");</script>';
+          echo '<script type="text/javascript">alert("Erro! SENHA INVÁLIDA. Erro: 0x00");</script>';
           echo '<script type="text/javascript">window.close();</script>';
          }
         }
