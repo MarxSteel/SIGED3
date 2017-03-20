@@ -103,7 +103,7 @@ else{
           <tr>
            <?php
             if ($Distrito === "9999") { ?>
-             <th>ID</th>
+             
              <th>Nome</th>
              <th>Data de Nascimento</th>
              <th>Interact Clube de</th>
@@ -112,27 +112,22 @@ else{
             <?php
             }
             else{ ?>
-           <th>ID</th>
-           <th>Nome</th>
-           <th>Data de Nascimento</th>
-           <th>Interact Clube de</th>
-           <th></th>
+           
+           <th width="40%">Nome</th>
+           <th width="15%">Dt. Nascimento</th>
+           <th width="20%">Interact Clube de</th>
+           <th width="25%"></th>
            <?php } ?>
           </tr>
          </thead>
          <tbody>
           <?php while ($user = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
           <tr>
-           <td>
-            <?php
-             echo $user['icbr_uid'];
-             $LinkUser = $user['icbr_uid'];
-            ?>
-           </td>
            <td><?php echo $user['icbr_AssNome'] ?></td>
            <td><?php echo $user['icbr_AssDtNascimento'] ?></td>
            <td><?php echo $user['icbr_AssClube'] ?></td>
            <?php
+           $LinkUser = $user['icbr_uid'];
             if ($Distrito === "9999") { ?>
            <td><?php echo $user['icbr_AssDistrito'] ?></td>
            <?php }
@@ -141,13 +136,13 @@ else{
            }
 ?>
            <td>
-            <a class="btn btn-info btn-sm" href="javascript:abrir('VerSocio.php?ID=<?php echo $LinkUser; ?>');">
-             <i class="fa fa-search"></i> Ver Perfil
+            <a class="btn btn-info btn-xs" href="javascript:abrir('VerSocio.php?ID=<?php echo $LinkUser; ?>');">
+             <i class="fa fa-search"></i>
             </a>
-            <a class="btn btn-info btn-sm bg-navy" href="javascript:abrir('PrintUser.php?ID=<?php echo $LinkUser; ?>');">
-             <i class="fa fa-print"> Credencial</i>
+            <a class="btn btn-info btn-xs bg-navy" href="javascript:abrir('PrintUser.php?ID=<?php echo $LinkUser; ?>');">
+             <i class="fa fa-print"></i>
             </a>
-            <a class="btn btn-danger btn-sm" href="javascript:abrir('DesativaAssociado.php?ID=<?php echo $LinkUser; ?>');">
+            <a class="btn btn-danger btn-xs" href="javascript:abrir('DesativaAssociado.php?ID=<?php echo $LinkUser; ?>');">
              <i class="fa fa-remove"></i>
             </a>
            </td>
@@ -165,22 +160,16 @@ else{
         <table id="clubesInativo" class="table table-bordered table-striped">
          <thead>
           <tr>
-           <th>ID</th>
-           <th>Nome</th>
-           <th>Data de Nascimento</th>
-           <th>Interact Clube de</th>
-           <th></th>
+           <th width="40%">Nome</th>
+           <th width="15%">Dt. Nascimento</th>
+           <th width="20%">Interact Clube de</th>
+           <th width="25%"></th>
           </tr>
          </thead>
          <tbody>
           <?php while ($Ain = $AssI->fetch(PDO::FETCH_ASSOC)): ?>
           <tr>
-           <td>
-            <?php
-             echo $Ain['icbr_uid'];
-             $LinkUserIn = $Ain['icbr_uid'];
-            ?>
-           </td>
+            <?php $LinkUserIn = $Ain['icbr_uid']; ?>
            <td><?php echo $Ain['icbr_AssNome'] ?></td>
            <td><?php echo $Ain['icbr_AssDtNascimento'] ?></td>
            <td><?php echo $Ain['icbr_AssClube'] ?></td>
@@ -196,14 +185,6 @@ else{
           </tr>
           <?php endwhile; ?>
          </tbody>
-         <tfoot>
-          <tr>
-           <td><strong>ID</strong></td>
-           <td><strong>Interact Club de:</strong></td>
-           <td><strong>Reuni&otilde;es</strong></td>
-           <td></td>
-          </tr>
-         </tfoot>
         </table>
        </div>
       </div>

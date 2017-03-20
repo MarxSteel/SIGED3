@@ -77,11 +77,13 @@ include_once '../header_top.php';
       </small>
      </div>
      <div class="box-body">
-      <div class="col-xs-8">
+      <div class="col-md-8 col-xs-12">
+       <div class="col-md-8 col-xs-12">
        <li class="list-group-item">
         <b>#<?php echo $IDClubeSocio; ?></b>
         <span class="pull-right">Interact Club de <?php echo $ClubeSocio; ?></span>
        </li>
+       </div>
        <li class="list-group-item">
         <b>Data de Posse:</b> 
         <a class="pull-right">

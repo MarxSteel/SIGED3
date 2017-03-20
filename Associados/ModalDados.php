@@ -13,13 +13,23 @@
      Obrigatoriamente, é necessário digitar o CPF com Pontos e traços, ou seja: 012.345.678-90.
     </div>
     <form onsubmit="return valida_form();" name="NovoSocio" id="name" method="post" action="" enctype="multipart/form-data">
-     <div class="col-xs-8">Nome Completo
+     <div class="col-xs-12">Nome Completo
       <input type="text" name="nome" class="form-control" required>
      </div>
-     <div class="col-xs-4">CPF
-      <input type="text" name="cpf"  minlength="14" maxlength="14" class="form-control" required placeholder="999.999.999-99">
+     <div class="col-md-4 col-xs-12">Tipo de Documento
+      <select class="form-control" name="docto" required>
+       <option value="" selected="selected">SELECIONE</option>
+       <option value="CPF">CPF</option>
+       <option value="RG">RG</option>
+      </select>
      </div>
-     <div class="col-md-6">Interact Club de:
+     <div class="col-md-4 col-xs-12">CPF
+      <input type="text" name="cpf"  minlength="14" maxlength="14" class="form-control" placeholder="999.999.999-99">
+     </div>
+     <div class="col-md-4 col-xs-12">RG
+      <input type="text" name="rg"  minlength="14" maxlength="14" class="form-control" placeholder="12.345.678-90">
+     </div>
+     <div class="col-md-6 col-xs-12">Interact Club de:
       <?php
        $QueryClubes3 = "SELECT * FROM icbr_clube WHERE icbr_Status='A' AND icbr_Distrito='$Distrito'";
         // seleciona os registros
@@ -27,7 +37,7 @@
         $stmt3->execute();
       ?>
       <div class="form-group">
-       <select class="form-control select2" name="clube" style="width: 100%;">
+       <select class="form-control select2" name="clube" style="width: 100%;" required>
         <option value="" selected="selected">SELECIONE</option>
         <?php while ($r = $stmt3->fetch(PDO::FETCH_ASSOC)): ?>
         <option value="<?php echo $r['icbr_id'] ?>"><?php echo $r['icbr_Clube'] ?></option>
@@ -35,7 +45,7 @@
        </select>
       </div>
      </div>
-     <div class="col-md-6">Cargo:
+     <div class="col-md-6 col-xs-12">Cargo:
       <?php
        $ChamarCargo = "SELECT * FROM listaCargos WHERE TipoCargo = 1";
         // seleciona os registros
@@ -51,20 +61,20 @@
        </select>
       </div>
      </div>
-     <div class="col-xs-4">Data de Posse
+     <div class="col-md-4 col-xs-6">Data de Posse
       <div class="input-group">
        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
        <input type="text" name="posse" class="form-control" minlength="10" maxlength="10" OnKeyPress="formatar('##/##/####', this)">
       </div>
      </div>
-     <div class="col-xs-4">Data de Nascimento
+     <div class="col-md-4 col-xs-6">Data de Nascimento
       <div class="input-group">
        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-       <input type="text" name="nasc" class="form-control" minlength="10" maxlength="10" OnKeyPress="formatar('##/##/####', this)" required>
+       <input type="text" name="nasc" required="required" class="form-control" minlength="10" maxlength="10" OnKeyPress="formatar('##/##/####', this)" >
       </div>
      </div>
-     <div class="col-xs-4">Gênero
-      <select class="form-control" name="genero" required>
+     <div class="col-md-4 col-xs-12">Gênero
+      <select class="form-control" name="genero" required="required>
        <option value="" selected="selected">SELECIONE</option>
        <option value="M">Masculino</option>
        <option value="F">Feminino</option>
@@ -77,16 +87,16 @@
       <div class="col-xs-3">Nº
        <input type="text" name="numero" class="form-control" required  >
       </div>
-      <div class="col-xs-6">Bairro/Setor
+      <div class="col-md-6 col-xs-12">Bairro/Setor
        <input type="text" name="bairro" class="form-control" required  >
       </div>
-      <div class="col-xs-6">Cidade
+      <div class="col-md-6 col-xs-12">Cidade
        <input type="text" name="cidade" class="form-control" required  >
       </div>
-      <div class="col-xs-4">CEP
+      <div class="col-md-4 col-xs-6">CEP
        <input type="text"  name="cep" minlength="10" maxlength="10"  class="form-control" required  >
       </div>
-      <div class="col-xs-4">Estado
+      <div class="col-md-4 col-xs-6">Estado
        <select class="form-control" name="uf" required>
         <option value="" selected="selected">SELECIONE</option>
         <option value="Acre">Acre</option>
@@ -118,17 +128,17 @@
         <option value="Tocantins">Tocantins</option>
        </select>
       </div>
-     <div class="col-xs-4">E-Mail
+     <div class="col-md-4 col-xs-12">E-Mail
       <input type="text" name="mail" class="form-control">
      </div>
-     <div class="col-xs-2">DDD
+     <div class="col-md-2 col-xs-4">DDD
       <input type="text" name="ddd" class="form-control">
      </div>
-     <div class="col-xs-4">Telefone (SEM TRAÇOS)
+     <div class="col-md-4 col-xs-8">Telefone (SEM TRAÇOS)
       <input type="text" name="telefone" class="form-control">
      </div>
 
-      <div class="col-xs-6"><br /></div><br />
+      <div class="col-md-6 col-xs-12"><br /></div><br />
        <div><br /><br />
         <input name="btvalidar" type="submit" class="btn btn-primary" id="btvalidar" value="Cadastrar" />
         <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
@@ -137,7 +147,17 @@
     <?
     if(isset($_POST['btvalidar']))
     {
-    $cpf_enviado = validaCPF($_POST['cpf']);
+    $TipoDocumento = $_POST['docto'];
+     if ($TipoDocumento === "RG") {
+       $DC = $_POST['rg'];
+       $cpf_enviado = true;
+     }
+     elseif ($TipoDocumento === "CPF") {
+      $DC = $_POST['cpf'];
+      $cpf_enviado = validaCPF($_POST['cpf']);
+
+     }
+
      if($cpf_enviado == true){
             // só continua com as queries se o CPF for validado
       $Nome = $_POST['nome'];
@@ -152,7 +172,7 @@
       $UF = $_POST['uf'];
       $CEP = $_POST['cep'];
       $G = $_POST['genero'];
-      $CPF = $_POST['cpf'];
+    
       $Mail = $_POST['mail'];
       $DDD1 = $_POST['ddd'];
       $TELEFONE_1 = $_POST['telefone'];
@@ -161,7 +181,7 @@
        $chamaclube->execute();
        $iid = $chamaclube->fetch();
         $NomeClube = $iid['icbr_Clube'];
-         $executa = $PDO->query("INSERT INTO icbr_associado (icbr_AssNome, icbr_DtPosse, icbr_AssCargo, icbr_AssClube, icbr_AssClubeID, icbr_AssDistrito, icbr_AssDtNascimento, icbr_AssEndereco, icbr_AssNum, icbr_AssBairro, icbr_AssCidade, icbr_AssUF, icbr_AssCEP, icbr_AssGenero, icbr_AssFoto, icbr_CPF, icbr_AssEmail, DDD_1, TELEFONE_1) VALUES ('$Nome', '$Posse', '$Cargo', '$NomeClube', '$Clube', '$Distrito', '$DtNasc', '$Rua', '$Num', '$Bairro', '$Cidade', '$UF', '$CEP', '$G', 'SemFoto.jpg', '$CPF', '$Mail', '$DDD1', '$TELEFONE_1')");
+         $executa = $PDO->query("INSERT INTO icbr_associado (icbr_AssNome, icbr_DtPosse, icbr_AssCargo, icbr_AssClube, icbr_AssClubeID, icbr_AssDistrito, icbr_AssDtNascimento, icbr_AssEndereco, icbr_AssNum, icbr_AssBairro, icbr_AssCidade, icbr_AssUF, icbr_AssCEP, icbr_AssGenero, icbr_AssFoto, icbr_CPF, icbr_AssEmail, DDD_1, TELEFONE_1) VALUES ('$Nome', '$Posse', '$Cargo', '$NomeClube', '$Clube', '$Distrito', '$DtNasc', '$Rua', '$Num', '$Bairro', '$Cidade', '$UF', '$CEP', '$G', 'SemFoto.jpg', '$DC', '$Mail', '$DDD1', '$TELEFONE_1')");
           if($executa){
            echo '<script type="text/JavaScript">alert("Associado cadastrado com sucesso!");location.href="dashboard.php"</script>';
           }
@@ -213,12 +233,13 @@
        </select>
       </div>
      </div>
-    <div class="col-xs-3">Senha de Administrador
-     <input name="passRDI" type="password" required class="form-control" />
-    </div>
-        <div class="col-xs-4">Selecione o Arquivo
-     <input name="fileUpload" type="file" class="form" onfocus="this.value='';"/>      
-    </div><br /><br /><br /><br /><br /><br /><br />
+   <div class="col-md-4 col-xs-12">Selecione o Arquivo
+    <input name="fileUpload" type="file" class="form" onfocus="this.value='';"/>      
+   </div>
+   <div class="col-md-3 col-xs-12">Senha de Administrador
+    <input name="passRDI" type="password" required class="form-control" />
+   </div>
+    <br /><br /><br /><br /><br /><br /><br />
     <div>
     <input name="ImportaSocio" type="submit" class="btn btn-primary" id="ImportaSocio" value="IMPORTAR LISTA DE ASSOCIADOS" />
      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

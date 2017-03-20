@@ -44,7 +44,7 @@
         </button>
       </div>
       <div class="modal-body">
-       <iframe src="<?php echo $server; ?>/documentos/TERMO_DE_USO.pdf" width="850" height="900" align="center" style="border: none;"></iframe>
+       
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Fechar</button>

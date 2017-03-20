@@ -67,7 +67,7 @@ require_once '../QueryUser.php';
         <h3 class="box-title">Lista de Clubes <strong>ATIVOS</strong> do <strong>Distrito <?php echo $Distrito; ?></strong></h3>
        </div>
        <div class="box-body">
-        <table id="clubesAtivo" class="table table-bordered table-striped">
+        <table id="clubesAtivo" class="table table-bordered table-striped table-responsive">
          <thead>
           <tr>
            <td width="10%"><strong>ID</strong></td>
@@ -198,7 +198,7 @@ include_once '../footer.php';
 <!-- page script -->
 <script>
   $(function () {
-    $("#example1").DataTable();
+    $("#clubesAtivo").DataTable();
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,
@@ -207,7 +207,7 @@ include_once '../footer.php';
       "info": true,
       "autoWidth": false
     });
-    $('#clubesAtivo').DataTable({
+    $('#clubesAtivos').DataTable({
       "paging": true,
       "lengthChange": false,
       "searching": true,

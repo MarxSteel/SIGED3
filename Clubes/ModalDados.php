@@ -363,28 +363,30 @@
    </div>
    <div class="modal-body">
     <form name="NovoClube" id="NovoClube" method="post" action="" enctype="multipart/form-data">
-     <div class="col-xs-4">Interact Club de:
+     <div class="col-md-4 col-xs-12">Interact Club de:
       <input type="text" name="NomeClube" class="form-control" placeholder="Curitiba Leste" />
      </div>
-     <div class="col-xs-4">Rotary Club Patrocinador (Nome Completo):
+     <div class="col-md-4 col-xs-12">Rotary Club Patrocinador (Nome Completo):
       <input type="text" name="NomeRotary" class="form-control" placeholder="Rotary Club de Curitiba Leste" />
-     </div><br />
+     </div>
+     <div class="col-md-4 col-xs-12">Data de Fundação
      <div class="input-group">
       <div class="input-group-addon">
        <i class="fa fa-calendar"></i>
       </div>
        <input type="text" name="DataFundado" class="form-control" minlength="10" maxlength="10" OnKeyPress="formatar('##/##/####', this)"  placeholder="Data de Funda&ccedil;&atilde;o">
       </div>
+      </div>
       <div class="col-xs-12">
       <h5><strong>DADOS DE REUNI&Atilde;O</strong></h5>
       </div>
-       <div class="col-xs-4">Local de Reunião
+       <div class="col-md-4 col-xs-12">Local de Reunião
         <input type="text" name="LocalReuniao"  class="form-control" placeholder="Digite aqui o nome do local de reunião" />
        </div>
-       <div class="col-xs-2">Hor&aacute;rio de Reuni&atilde;o
+       <div class="col-md-2 col-xs-6">Hor&aacute;rio de Reuni&atilde;o
         <input type="text" name="HoraReuniao"  class="form-control" minlength="5" maxlength="5" placeholder="HH:MM" />
        </div>
-       <div class="col-xs-3">Periodo
+       <div class="col-md-3 col-xs-6">Periodo
         <select class="form-control" name="PeriodoReuniao" >
          <option checked> >>SELECIONE<<</option>
          <option value="semanal"> Semanal</option>
@@ -392,7 +394,7 @@
          <option value="mensal"> Mensal</option>
         </select>
        </div>
-       <div class="col-xs-3">Dia da Semana
+       <div class="col-md-3 col-xs-12">Dia da Semana
         <select class="form-control" name="diaSemana" >
          <option checked> >>SELECIONE<<</option>
          <option value="Segunda-Feira"> Segunda-Feira</option>
@@ -407,22 +409,22 @@
       <div class="col-xs-12">
       <h5><strong>DADOS DE ENDERE&Ccedil;O</strong></h5>
       </div>
-       <div class="col-xs-10">Endere&ccedil;o
+       <div class="col-md-10 col-xs-8">Endere&ccedil;o
         <input type="text" name="rua"  class="form-control" placeholder="RUA SETE DE SETEMBRO" />
        </div>
-       <div class="col-xs-2">N&uacute;mero
+       <div class="col-md-2 col-xs-4">N&uacute;mero
         <input type="text" name="num"  class="form-control"/>
        </div>
-       <div class="col-xs-4">Complemento
+       <div class="col-md-4 col-xs-12">Complemento
         <input type="text" name="novoComp"  class="form-control" placeholder="Ex.: Ao lado da Loja de Ferragens" />
        </div>
-       <div class="col-xs-4">Bairro
+       <div class="col-md-4 col-xs-12">Bairro
         <input type="text" name="bairro"  class="form-control" placeholder="BAIRRO" />
        </div>
-       <div class="col-xs-4">Cidade
+       <div class="col-md-4 col-xs-12">Cidade
         <input type="text" name="cidade"  class="form-control" placeholder="CIDADE" />
        </div>
-       <div class="col-xs-4">Estado
+       <div class="col-md-4 col-xs-12">Estado
         <select class="form-control" name="UF" required="required">
          <option checked> >>SELECIONE<<</option>
          <option value="AC"> Acre</option>
@@ -452,10 +454,10 @@
          <option value="SE"> Sergipe</option>
         </select>
        </div>
-       <div class="col-xs-4">CEP (COM PONTUAÇÃO)
+       <div class="col-md-4 col-xs-6">CEP (COM PONTUAÇÃO)
         <input type="text" name="CEP"  class="form-control" minlength="10" maxlength="10" placeholder="12.345-678" />
        </div>       
-        <div class="col-xs-4">Senha de Administrador
+        <div class="col-md-4 col-xs-6">Senha de Administrador
          <input name="passRDI" type="password"  class="form-control" />
         </div>
         <div class="col-xs-12"><br />
@@ -489,42 +491,16 @@
           $Cadastra = $PDO->query("INSERT INTO icbr_clube (icbr_Clube, icbr_DataFundado, icbr_Distrito, icbr_RotaryPadrinho, icbr_CEnd, icbr_CNum, icbr_Bairro, icbr_Cidade, icbr_CEP, icbr_UF, icbr_Periodo, icbr_Semana, icbr_Horario, icbr_Complemento, icbr_Status, icbr_EndComplemento) VALUES ('$NomeClube', '$DataFundado', '$Distrito', '$NomeRotary', '$Rua', '$Num', '$Bairro', '$Cidade', '$CEP', '$UF', '$PeriodoReuniao', '$DiaReuniao', '$HoraReuniao', '$LocalReuniao', 'A', '$novoComp')");
            if($Cadastra)
            {
-            $CodEvento = "101";
-            $DescreveEvento = "Cadastro de Novo Club: Interact Club de " . $NomeClube;
-             $v1 = date('d/m/Y - H:i:s');
-             $D1 = "<strong>Nome do Club:</strong> " . $NomeClube;
-             $D2 = "<strong>Rotary Clubs Patrocinadores:</strong> " . $NomeRotary;
-              $DetalheClube = $D1 . $D2;
-             $L1 = "<strong>Local de Reunião:</strong> " . $LocalReuniao;
-             $L2 = " <strong>Horário:</strong> " . $HoraReuniao;
-             $L3 = " <strong>Periodo:</strong> " . $PeriodoReuniao;
-             $L4 = " <strong>Dia da Semana:</strong> " . $DiaReuniao;
-              $DetalheLocal - $L1 . $L2 . $L3 . $L4;
-             $E1 = "<strong>Endereço: </strong>" . $Rua;
-             $E2 = ", <strong>Num.:</strong>" . $Num;
-             $E3 = "<br /><strong>Complemento: </strong>" . $novoComp;
-             $E4 = " <strong>Bairro: </strong>" . $Cidade . " <strong>Cidade: </strong>" . $Cidade;
-             $E5 = " <strong>CEP.: </strong>" . $CEP . " - " . $UF;
-              $DetalheEndereco = $E1 . $E2 . $E3 . $E4 . $E5;
-            $T1 = "<h3>Dados do Cadastro: </h3><br /> <i>Informações do Clube: </i><br />" . $DetalheClube;
-            $T2 = "<br /><i>Dados de Local de Reunião:<i> " . $DetalheLocal;
-            $T3 = "<br /><i>Endereço:<i> " . $DetalheEndereco;
-            $T4 = "Data de Cadastro: " . $V1 . "<br /> Usuário responsável pelo Cadastro: " . $CodigoAssociado . " - " . $uNome;
-             $Tudo = $T1 . $T2 . $T3 . $T4;
-            $InsereLog = $PDO->query("INSERT INTO log_dados (usuario, CodEvento, DescreveEvento, DetalhesEvento) VALUES ('$CodigoAssociado', '101', '$DescreveEvento', '$Tudo')");
-             if ($InsereLog)
-             {
-              echo '<script type="text/JavaScript">alert("Clube Cadastrado com Sucesso");
+            echo '<script type="text/JavaScript">alert("Clube Cadastrado com Sucesso!");
               location.href="dashboard.php"</script>';
-             }
-             else{
-              echo '<script type="text/javascript">alert("Erro! Não foi possível concluir. Erro: 0x01");</script>';
-              echo '<script type="text/javascript">window.close();</script>';
-             }
+
+
+            echo '<script type="text/javascript">alert("Clube Cadastrado com Sucesso!");</script>';
+            echo '<script type="text/javascript">window.close();</script>';
            }
            else
            {
-            echo '<script type="text/javascript">alert("Erro! Não foi possível concluir. Erro: 0x03");</script>';
+            echo '<script type="text/javascript">alert("Erro! Não foi possível concluir. Erro: 0x02");</script>';
             echo '<script type="text/javascript">window.close();</script>';
            }
          }

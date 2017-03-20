@@ -1,4 +1,4 @@
-     <div class="col-md-12">
+     <div class="col-md-12>
       <div class="box box-warning collapsed-box box-solid">
        <div class="box-header with-border">
         <h3 class="box-title">HISTÓRICO DE CARGOS DO ASSOCIADO</h3>
