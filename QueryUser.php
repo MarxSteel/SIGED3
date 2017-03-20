@@ -12,7 +12,9 @@
   $SenhaUsuarioLogado = $row['senha'];
   $CodigoAssociado = $row['codAssociado'];
   $CorPainel = $row['color'];
- 
+  $IDUSer = $row['codLogin'];
+  $LoginNome = $NomeUserLogado;
+
  $DadosSocio = $PDO->prepare("SELECT * FROM icbr_associado WHERE icbr_uid='$CodigoAssociado'");
  $DadosSocio->execute();
   $Socio = $DadosSocio->fetch();
