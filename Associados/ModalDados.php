@@ -262,12 +262,10 @@
         date_default_timezone_set("Brazil/East"); //Definindo timezone padrão
         $ext = strtolower(substr($_FILES['fileUpload']['name'],-4)); //Pegando extensão do arquivo
         $DataNome = date("Ymd-His");
-        $NomeValidar = $Distrito . $DataNome;
+        $NomeValidar = $Distrito . $DataNome . ".";
         $new_name = $NomeValidar . $ext; //Definindo um novo nome para o arquivo
         $dir = 'planilhas/'; //Diretório para uploads
         move_uploaded_file($_FILES['fileUpload']['tmp_name'], $dir.$new_name); //Fazer upload do arquivo
-        echo '<script type="text/javascript">alert("IMPORTANDO ARQUIVO, NÃO FECHAR A PÁGINA!");</script>';
-        //echo '<script type="text/javascript">alert("' . $new_name . '");</script>';  //mostrar nome do arquivo importado
         error_reporting(E_ALL ^ E_NOTICE); 
           require_once 'excel_reader2.php'; 
           $data = new Spreadsheet_Excel_Reader($dir . "/" . $NomeValidar . '.xls'); 

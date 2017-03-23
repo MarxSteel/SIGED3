@@ -11,14 +11,7 @@ define('DB_HOST', $host);
 define('DB_USER', $user);
 define('DB_PASS', $pass);
 define('DB_NAME', $banco);
-
-
-
-
-
 date_default_timezone_set('America/Sao_Paulo'); //DEFININDO O TIMEZONE PARA TODAS AS PÁGINAS
-
-
 $conn = mysqli_connect($host, $user, $pass, $banco) or die("Connection failed: " . mysqli_connect_error());
 
 
