@@ -14,6 +14,7 @@
   $CorPainel = $row['color'];
   $IDUSer = $row['codLogin'];
   $LoginNome = $NomeUserLogado;
+  $PrivICBR = $row['icbr'];
 
  $DadosSocio = $PDO->prepare("SELECT * FROM icbr_associado WHERE icbr_uid='$CodigoAssociado'");
  $DadosSocio->execute();
