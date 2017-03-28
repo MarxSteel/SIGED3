@@ -4,7 +4,7 @@ $Dados->execute();
 $Qry = $Dados->fetch();
 
 $NomeProjeto = $Qry['pro_nome'];
-$AvenidaProjeto = $Qry['pro_avenida'];
+$Avenida = $Qry['pro_avenida'];
 $ClubeCodigo = $Qry['pro_clube'];
 $StatusProjeto = $Qry['pro_status'];
 $DataCadastro = $Qry['pro_DtCadastro'];
@@ -26,6 +26,55 @@ elseif ($StatusProjeto === "3") {
 else{
 
 }
+
+if ($Avenida === "INTERNACIONAIS") 
+{
+	$AvenidaProjeto = '
+         <div class="info-box2 shazam-roxo">
+          <span class="info-box-icon4"><i class="glyphicon glyphicon-globe"></i></span>
+           <div class="info-box-content3" style="text-align: center;"><strong>INTERNACIONAIS</strong>
+           </div>
+          </div>';
+}
+elseif ($Avenida === "IMAGEM PUBLICA") {
+	$AvenidaProjeto = '
+         <div class="info-box2 shazam-vermelho">
+          <span class="info-box-icon4"><i class="fa fa-laptop"></i></span>
+           <div class="info-box-content3" style="text-align: center;"><strong>IMAGEM PÚBLICA</strong>
+           </div>
+          </div>';
+}
+elseif ($Avenida === "COMUNIDADES") {
+	$AvenidaProjeto = '
+         <div class="info-box2 shazam-azul">
+          <span class="info-box-icon4"><i class="fa fa-child"></i></i></span>
+           <div class="info-box-content3" style="text-align: center;"><strong>COMUNIDADES</strong>
+           </div>
+          </div>';
+}
+elseif ($Avenida === "INTERNOS") {
+	$AvenidaProjeto = '
+         <div class="info-box2 shazam-laranja">
+          <span class="info-box-icon4"><i class="fa fa-heartbeat"></i></span>
+           <div class="info-box-content3" style="text-align: center;"><strong>INTERNOS</strong>
+           </div>
+          </div>';
+}
+elseif ($Avenida === "FINANCAS") {
+	$AvenidaProjeto = '
+         <div class="info-box2 shazam-verde">
+          <span class="info-box-icon4"><i class="fa fa-money"></i></span>
+           <div class="info-box-content3" style="text-align: center;"><strong>FINANÇAS</strong>
+           </div>
+          </div>';
+}
+else{
+$AvenidaProjeto = "Erro";
+}
+
+
+
+
 
 $ChamaClube = $PDO->prepare("SELECT * FROM icbr_clube WHERE icbr_id='$ClubeCodigo'");
 $ChamaClube->execute();
