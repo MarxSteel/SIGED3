@@ -15,7 +15,7 @@ require_once '../QueryUser.php';
  <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
- <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+ <link rel="stylesheet" href="../dist/css/AdminLTE.css">
  <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
  <link rel="stylesheet" href="../plugins/iCheck/flat/blue.css">
  <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
@@ -78,7 +78,7 @@ require_once '../QueryUser.php';
    <div class="col-md-4 col-sm-6 col-xs-12">
     <div class="info-box">
      <a data-toggle="modal" data-target="#cadProjeto">
-      <span class="info-box-icon btn-danger"><i class="fa fa-plus"></i></span>
+      <span class="info-box-icon3 bg-white"><img src="../dist/img/icons/anp2.png" width="100"></span>
      </a>
      <div class="info-box-content"><br /><h4>Adicionar Projeto</h4></div>
     </div>
@@ -121,70 +121,35 @@ require_once '../QueryUser.php';
              if ($StatusProjeto === '1') {
                echo '
                <td>
-                <div class="bg-green-active color-palette" align="middle">
-                 <span>REVISADO</span>
+                <div class="bg-purple-active color-palette" align="middle">
+                 <span>AGUARDANDO REVISÃO</span>
                 </div>
                </td>';
+               echo '<td>';
+                echo '<a class="btn btn-info btn-xs" href="javascript:abrir(';
+                echo "'vProjeto.php?ID=" . $at['pro_chave'] . "');";
+                echo '"><i class="fa fa-search"></i></a>&nbsp;';
+                echo '<a class="btn bg-navy btn-xs" href="uploads/' . $at['pro_arquivo'] . '"/><i class="fa fa-download"></i>';
+               echo "</td>"; 
              }
              elseif ($StatusProjeto === "2") {
                echo '
                <td>
-                <div class="bg-purple-active color-palette" align="middle">
-                 <span>AGUARDANDO REVISÃO</span>
+                <div class="bg-warning-active color-palette" align="middle">
+                 <span>REPROVADO</span>
                 </div>
                </td>';
              }
              elseif ($StatusProjeto === "3") {
                echo '
                <td>
-                <div class="bg-orange-active color-palette" align="middle">
-                 <span>PENDENTE</span>
-                </div>
-               </td>';
-             }
-             elseif ($StatusProjeto === "4") {
-               echo '
-               <td>
-                <div class="bg-navy-active color-palette" align="middle">
-                 <span>N&Atilde;O PREENCHIDO</span>
+                <div class="bg-success-active color-palette" align="middle">
+                 <span>APROVADO</span>
                 </div>
                </td>';
              }
              else{
              }
-            echo '<td>';
-            if ($StatusProjeto === "4") {
-             echo '<a class="btn bg-navy btn-xs btn-block" href="javascript:abrir(';
-             echo "'chaveProjeto.php?ID=" . $at['id'] . "');";
-             echo '"><i class="fa fa-envelope"></i> Enviar Chave</a>&nbsp;';
-            }
-            else
-            {
-             echo '<a class="btn btn-info btn-xs" href="javascript:abrir(';
-             echo "'vProjeto.php?ID=" . $at['id'] . "');";
-             echo '"><i class="fa fa-search"></i></a>&nbsp;';
-             echo '<a class="btn btn-danger btn-xs" href="javascript:abrir(';
-             echo "'dProjeto.php?ID=" . $at['id'] . "');";
-             echo '"><i class="fa fa-close"></i></a>&nbsp;';
-             echo '<a class="btn btn-success btn-xs" href="javascript:abrir(';
-             echo "'editaprojeto.php?ID=" . $at['id'] . "');";
-             echo '"><i class="fa fa-refresh"></i></a>&nbsp;';
-             if ($StatusProjeto === "3") {
-              echo '<a class="btn btn-warning btn-xs" href="javascript:abrir(';
-              echo "'devolveProjeto.php?ID=" . $at['id'] . "');";
-              echo '"><i class="fa fa-repeat"></i></a>&nbsp;';
-             }
-
-             else{
-
-             }              
-            }
-
-
-            echo "</td>"; 
- 
-
-
           echo '</tr>';
           endwhile;
         ?>
@@ -266,23 +231,9 @@ require_once '../QueryUser.php';
        </select>
       </div>
      </div>
-     <div class="col-xs-3">Andamento do Projeto
-      <select class="form-control" name="andamentoProjeto" required>
-       <option value="" selected="selected">SELECIONE</option>
-       <option value="1">PLANEJAMENTO</option>
-       <option value="2">EXECU&Ccedil;&Atilde;O</option>
-       <option value="3">PROJETO FINALIZADO</option>
-      </select>
-     </div>
-     <div class="col-xs-3">Estrutura do Projeto
-      <select class="form-control" name="dimensaoProjeto" required>
-       <option value="" selected="selected">SELECIONE</option>
-       <option value="1">Projeto do Clube</option>
-       <option value="2">Multi-Clube</option>
-       <option value="3">Distrital</option>
-       <option value="4">Multi-Distrital</option>
-      </select>
-     </div>
+<div class="col-xs-4">Selecione o Arquivo (<b>APENAS PDF</b>)
+     <input name="fileUpload" type="file" class="form" onfocus="this.value='';"/>      
+    </div>
      <div class="pull-right"><br />
       <input name="NovoProjeto" type="submit" class="btn btn-danger btn-flat" value="CADASTRAR"  /> 
       <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">FECHAR</button>
@@ -291,22 +242,44 @@ require_once '../QueryUser.php';
     <?php
     if(@$_POST["NovoProjeto"])
     {
+     if(isset($_FILES['fileUpload']))
+     {
       $pNome = $_POST['nomeProjeto'];
       $pAvenida = $_POST['avenidaProjeto'];
       $pClube = $_POST['clubeProjeto'];
-      $pAndamento = $_POST['andamentoProjeto'];
-      $pDimensao = $_POST['dimensaoProjeto'];
       $DataCadastro = date('d/m/Y - H:i');
-       $Cadastrar = $PDO->query("INSERT INTO icbr_projeto (pro_nome, pro_avenida, pro_clube, pro_status, pro_and, pro_dimensao, pro_distrito, pro_DataCadastro) VALUES ('$pNome', '$pAvenida', '$pClube', '4', '$pAndamento', '$pDimensao', '$Distrito', '$DataCadastro')");
-        if ($Cadastrar) 
+      date_default_timezone_set("Brazil/East"); //Definindo timezone padrão
+      $ext = strtolower(substr($_FILES['fileUpload']['name'],-4)); //Pegando extensão do arquivo
+      $DataNome = date("Ymd-His");
+      $NomeValidar = $Distrito . $DataNome;
+      $new_name = $NomeValidar . $ext; //Definindo um novo nome para o arquivo
+      $key1 = $Distrito . $pNome;
+      $projetokey = md5($key1);
+      $dir = 'uploads/'; //Diretório para uploads
+      $DescreveProjeto =  "Projeto Cadastrado: " . $pNome;
+        move_uploaded_file($_FILES['fileUpload']['tmp_name'], $dir.$new_name); //Fazer upload do arquivo
+        echo '<script type="text/javascript">alert("IMPORTANDO ARQUIVO, NÃO FECHAR A PÁGINA!");</script>';
+        //echo '<script type="text/javascript">alert("' . $new_name . '");</script>';  //mostrar nome do arquivo importado
+        error_reporting(E_ALL ^ E_NOTICE); 
+        //$CadastraProjeto = $PDO->query("INSERT INTO icbr_projeto (pro_nome, pro_avenida, pro_clube, pro_status, pro_chave, pro_arquivo) VALUES ('$pNome', '$pAvenida', '$pClube', '1', '$NomeValidar')");
+        $CadastraProjeto = $PDO->query("INSERT INTO icbr_projeto (pro_nome, pro_avenida, pro_clube, pro_distrito, pro_status, pro_arquivo, pro_chave, pro_DtCadastro) VALUES ('$pNome', '$pAvenida', '$pClube', '$Distrito', '1', '$new_name', '$projetokey', '$DataCadastro')");
+        if ($CadastraProjeto) 
         {
-         echo '<script type="text/JavaScript">alert("Cadastrado com Sucesso");
+          $InsereLog = $PDO->query("INSERT INTO log_projeto (DataCadastro, UserCadastro, CodProjeto, DetalheCodigo, Codigo) VALUES ('$DataCadastro', '$NomeUserLogado', '$projetokey', '$DescreveProjeto', '11')");
+           if ($InsereLog) {
+              echo '<script type="text/JavaScript">alert("Cadastrado com Sucesso");
               location.href="dashboard.php"</script>';
+           }
+           else{
+           echo '<script type="text/javascript">alert("Erro ao Cadastrar<br /> Erro: P0x01");</script>';
+           }
         }
         else
         {
-        echo '<script type="text/javascript">alert("Erro ao Cadastrar");</script>';
+           echo '<script type="text/javascript">alert("Erro ao Cadastrar<br /> Erro: P0x02");</script>';
         }
+
+       }
     }
     ?>
    </div>
