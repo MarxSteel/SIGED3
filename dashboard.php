@@ -15,7 +15,7 @@ require_once 'QueryUser.php';
  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
- <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+ <link rel="stylesheet" href="dist/css/AdminLTE.css">
  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
  <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
 </head>
@@ -26,74 +26,26 @@ require_once 'QueryUser.php';
     </section>
   </aside>
 <div class="content-wrapper">
+<?php 
+//include_once 'paginaDistrito.php';
+if ($PrivICBR === "1") {
+  include_once 'pic.php';
+}
+else{ ?>
+
  <section class="content-header">
   <h1>Página Inicial
-   <small><?php echo "<strong> Distrito " . $Distrito . "</strong> " . $Titulo; ?></small>
+   <small>MDIO Interact Brasil</small>
   </h1>
  </section>
  <section class="content">
-  <div class="row">
-   <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="info-box">
-     <a href="Distrito/dashboard.php" >
-      <span class="info-box-icon bg-navy"><i class="fa fa-building"></i></span>
-     </a>
-     <div class="info-box-content"><h4>Distrito <?php echo $Distrito; ?></h4>Dados do meu Distrito</div>
-    </div>
-   </div>
-  <?php if ($PrivClubes === "1") { ?>
-   <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="info-box">
-     <a href="Clubes/dashboard.php" >
-      <span class="info-box-icon btn-primary"><i class="fa fa-industry"></i></span>
-     </a>
-     <div class="info-box-content"><h4>Lista de Clubes</h4></div>
-    </div>
-   </div>
-  <?php } else { } if ($PrivAssociado === "1") { ?>
-   <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="info-box">
-     <a href="Associados/dashboard.php" >
-      <span class="info-box-icon btn-danger"><i class="fa fa-user"></i></span>
-     </a>
-     <div class="info-box-content"><h4>Lista de Associados</h4></div>
-    </div>
-   </div>
-  <?php } else { } if ($PrivTesouraria === "1") { ?>
-   <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="info-box">
-     <a href="Tesouraria/dashboard.php" >
-      <span class="info-box-icon bg-black disabled">
-       <i class="fa fa-dollar"></i>
-      </span>
-     </a>
-     <div class="info-box-content"><h4>Tesouraria</h4></div>
-    </div>
-   </div>
-  <?php } else { } if ($PrivANP === "1") { ?>
-   <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="info-box">
-     <a href="ANP/dashboard.php" >
-      <span class="info-box-icon bg-orange">
-       <i class="fa fa-file-text"></i>
-      </span>
-     </a>
-     <div class="info-box-content"><h4>Cadastro de Projetos</h4></div>
-    </div>
-   </div>
-  <?php } else { }?>
-  <!--
-   <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="info-box">
-     <a href="ANP/arquivo.php" >
-      <span class="info-box-icon bg-navy">
-       <i class="fa fa-list-alt"></i>
-      </span>
-     </a>
-     <div class="info-box-content"><h4>Arquivo Nacional de Projetos</h4></div>
-    </div>
-   </div> -->
- </section>
+  <div class="row"> 
+  <?php include_once 'linksDistrito.php'; ?>
+  </div>
+  </section>
+  <?php
+}
+?>
 </div><!-- CONTENT-WRAPPER -->
 <?php include_once 'footer.php'; ?>
 
