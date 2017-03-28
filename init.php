@@ -1,5 +1,5 @@
 <?php
-$server = 'http://192.168.0.3:8888/SIGED3';
+$server = 'http://192.168.0.2:8888/SIGED3';
 // constantes com as credenciais de acesso ao banco MySQL
 $host = "localhost:8889";
 $user = "root";
@@ -11,11 +11,6 @@ define('DB_HOST', $host);
 define('DB_USER', $user);
 define('DB_PASS', $pass);
 define('DB_NAME', $banco);
-
-
-
-
-
 date_default_timezone_set('America/Sao_Paulo'); //DEFININDO O TIMEZONE PARA TODAS AS PÁGINAS
 
 
